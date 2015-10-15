@@ -42,6 +42,8 @@ module.exports = function(grunt) {
                     'css/*',
                     '!**/background/**',
                     '!**/common/**',
+                    '!**/content_scripts/**',
+                    '!**/options/**',
                     '!**/popup/**',
                     '!**/test/**',
                     '**/main.js'
@@ -108,6 +110,9 @@ module.exports = function(grunt) {
                 files: [
                     'background/**/*',
                     'common/**/*',
+                    'content_scripts/**/*',
+                    'options/**/*',
+                    'popup/**/*',
                     'test/**/*',
                     '!**/main.js'
                 ],
@@ -124,6 +129,8 @@ module.exports = function(grunt) {
                     'css/*',
                     '!**/background/**',
                     '!**/common/**',
+                    '!**/content_scripts/**',
+                    '!**/options/**',
                     '!**/popup/**',
                     '!**/test/**',
                     '**/main.js'
