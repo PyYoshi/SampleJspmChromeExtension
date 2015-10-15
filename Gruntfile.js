@@ -28,7 +28,6 @@ module.exports = function(grunt) {
                 }]
             }
         },
-
         copy: {
             options: {
                 mtimeUpdate: true,
@@ -51,56 +50,6 @@ module.exports = function(grunt) {
                 dest: 'compiled/'
             }
         },
-
-        jscs: {
-            src: [
-                'src/js/**/*.js',
-                '!src/js/lib/**/*.js'
-            ],
-            options: {
-                config: '.jscsrc',
-                verbose: true,
-                fix: true
-            }
-        },
-
-        jshint: {
-            options: {
-                'node': true,
-                'esnext': true,
-                'bitwise': false,
-                'curly': false,
-                'eqeqeq': true,
-                'eqnull': true,
-                'immed': true,
-                'latedef': true,
-                'newcap': true,
-                'noarg': true,
-                'undef': true,
-                'strict': false,
-                'predef': [
-                    'chrome',
-                    'System',
-                ]
-            },
-            files: [
-                'src/js/**/*.js',
-                '!src/js/lib/**/*.js'
-            ]
-        },
-
-        mocha: {
-            tests: {
-                options: {
-                    log: true,
-                    logErrors: true,
-                    run: false,
-                    inject: '',
-                    urls: ['http://localhost:8888/test.html']
-                }
-            }
-        },
-
         watch: {
             copyCompiled: {
                 options: {
@@ -118,7 +67,6 @@ module.exports = function(grunt) {
                 ],
                 tasks: ['newer:babel:compiled']
             },
-
             copyUncompiled: {
                 options: {
                     event: ['added', 'changed'],
@@ -137,7 +85,6 @@ module.exports = function(grunt) {
                 ],
                 tasks: ['newer:copy:compiled']
             },
-
             js: {
                 files: [
                     'src/js/**/*.js',
@@ -148,10 +95,74 @@ module.exports = function(grunt) {
                     'jshint'
                 ]
             }
-
         },
 
+        jscs: {
+            src: [
+                'src/js/**/*.js',
+                '!src/js/lib/**/*.js'
+            ],
+            options: {
+                config: '.jscsrc',
+                verbose: true,
+                fix: true
+            }
+        },
+        jshint: {
+            options: {
+                'node': true,
+                'esnext': true,
+                'bitwise': false,
+                'curly': false,
+                'eqeqeq': true,
+                'eqnull': true,
+                'immed': true,
+                'latedef': true,
+                'maxparams': 5,
+                'maxdepth': 4,
+                'maxstatements': 35,
+                'maxcomplexity': 10,
+                'newcap': true,
+                'nonew': true,
+                'noarg': true,
+                'undef': true,
+                'strict': false,
+                'predef': [
+                    'document',
+                    'window',
+                    'chrome',
+                    'System',
+                    'mocha',
+                    'describe',
+                    'it'
+                ],
+                'ignores': ['src/js/lib/**/*.js']
+            },
+            files: [
+                'src/js/**/*.js'
+            ]
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 4044,
+                    base: './src'
+                }
+            }
+        },
+        mocha: {
+            tests: {
+                options: {
+                    log: true,
+                    logErrors: true,
+                    run: false,
+                    inject: '',
+                    urls: ['http://localhost:4044/test.html']
+                }
+            }
+        }
     });
 
     grunt.registerTask('compile', ['copy:compiled', 'babel:compiled', 'watch']);
+    grunt.registerTask('test', ['jshint', 'jscs', 'connect', 'mocha']);
 };
