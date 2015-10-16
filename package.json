@@ -14,6 +14,8 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-connect": "^0.11.2",
     "grunt-contrib-copy": "^0.8.1",
+    "grunt-contrib-htmlmin": "^0.5.0",
+    "grunt-contrib-imagemin": "^0.9.4",
     "grunt-contrib-jshint": "^0.11.3",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-jscs": "^2.1.0",
@@ -21,7 +23,9 @@
     "grunt-newer": "^1.1.1",
     "grunt-text-replace": "^0.4.0",
     "jit-grunt": "^0.9.1",
-    "jspm": "^0.16.12"
+    "jspm": "^0.16.12",
+    "rsvp": "^3.1.0",
+    "systemjs-builder": "^0.14.8"
   },
   "jspm": {
     "directories": {
