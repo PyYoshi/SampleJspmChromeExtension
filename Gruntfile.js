@@ -234,6 +234,18 @@ module.exports = function(grunt) {
                 cwd: 'compiled',
                 src: ''
             }
+        },
+        compress: {
+            release: {
+                options: {
+                    archive: 'packages/TweetNowBrowsing v<%= meta.buildVersion %>.zip'
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= meta.releaseDirectory %>',
+                    src: ['**']
+                }]
+            }
         }
     });
 
@@ -304,11 +316,22 @@ module.exports = function(grunt) {
         grunt.file.write('dist/manifest.json', strJSON);
     });
 
+    grunt.registerTask('compressRelease', function(releaseDirectory) {
+        grunt.config.set('meta.releaseDirectory', releaseDirectory);
+
+        var manifestJSON = grunt.file.readJSON('dist/manifest.json');
+        grunt.config.set('meta.buildVersion', manifestJSON.version);
+
+        grunt.task.run('copy:release');
+        grunt.task.run('compress:release');
+    });
+
     grunt.registerTask('build', function(buildFlag) {
         var isRelease = buildFlag === 'release';
 
         grunt.task.run('buildDist');
-        grunt.task.run('buildManifestJSON:'+buildFlag);
+        grunt.task.run('buildManifestJSON:' + buildFlag);
         grunt.task.run('imagemin', 'htmlmin');
+        grunt.task.run('compressRelease:' + 'release/');
     });
 };

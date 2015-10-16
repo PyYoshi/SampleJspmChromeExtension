@@ -2,3 +2,5 @@
 /compiled
 /dist
 /src/js/lib/jspm_packages
+/packages
+/release
