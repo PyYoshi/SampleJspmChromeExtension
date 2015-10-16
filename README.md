@@ -11,37 +11,39 @@
 - [grunt](http://gruntjs.com/)
 - [mocha](https://mochajs.org/)
 - [chai](http://chaijs.com/)
+- [jshint](http://jshint.com/about/)
+- [jscs](http://jscs.info/)
 
 # Prepare
 
 ```bash
-npm install jspm grunt-cli -g
-npm install
-jspm install
+$ npm install jspm grunt-cli -g
+$ npm install
+$ jspm install
 ```
 
 # Development
 
 ```bash
-grunt compile
+$ grunt compile
 ```
 
 # Test
 
 ```bash
-grunt test
+$ grunt test
 ```
 
 # Build
 
 ```bash
-grunt build
+$ grunt build
 ```
 
 ## Release Build
 
 ```bash
-grunt build:release
+$ grunt build:release
 ```
 
 and check ``packages`` directory.
